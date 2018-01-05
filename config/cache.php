@@ -18,12 +18,13 @@ return [
     'type'   => 'complex',
     'login_session' => [
         'type' => 'file',
-        'path' => RUNTIME_PATH
-    ]
-    // 缓存保存目录
-    'path'   => '',
-    // 缓存前缀
-    'prefix' => '',
-    // 缓存有效期 0表示永久缓存
-    'expire' => 0,
+        'path' => \think\facade\Env::get('runtime_path') . 'login/',
+        'expire' => 21600,//1天
+    ],
+//    // 缓存保存目录
+//    'path'   => '',
+//    // 缓存前缀
+//    'prefix' => '',
+//    // 缓存有效期 0表示永久缓存
+//    'expire' => 0,
 ];
