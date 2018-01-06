@@ -22,6 +22,13 @@ class Login extends BaseApiCtr
     public $restMethodList = 'post';
 
 
+    /**
+     * 登录
+     * @return \think\Response
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function save(){
         $array = [
             'username' => input('param.username'),
@@ -39,12 +46,11 @@ class Login extends BaseApiCtr
         }
         $res = $mlogin->where($array)->find();
         if ($res){
+            unset($res['password']);
             $token = Token::setAccessToken($res);
             return api_success($token);
         }else {
             return api_error('密码错误');
         }
-
-       return api_success('成功');
     }
 }
