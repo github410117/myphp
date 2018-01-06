@@ -10,20 +10,27 @@ namespace app\api\controller;
 
 use app\api\controller\Oauth as Oauth2;
 use think\Controller;
+use think\facade\Cache;
 
 class Token extends Controller
 {
 
 
-
+    /**
+     *
+     * @param $clientInfo
+     * @return array
+     */
    public static function setAccessToken($clientInfo) {
+       $phone = $clientInfo['username'];
        //生成token
-       $accessToken = self::buildToken();
+       $accessToken = self::buildToken($phone);
        $accessTokenInfo = [
-           'data' => $clientInfo,
+           'userinfo' => $clientInfo,
            'accessToken' => $accessToken,
-           'expiresTime' => time() + Oauth::$expires
+//           'expiresTime' => time() + Oauth::$expires
        ];
+       self::saveToken($phone,$accessToken);
        return $accessTokenInfo;
    }
 
@@ -36,6 +43,18 @@ class Token extends Controller
     protected static function buildToken($phone = ''){
         $str = md5(uniqid(md5(microtime(true)), true));
         return sha1($str.$phone);
+    }
+
+    /**
+     * 保存token
+     * @param string $phone
+     */
+    protected static function saveToken($phone = '',$btoken = ''){
+        try {
+            Cache::store('redis')->set($phone,$btoken);
+        } catch (\Exception $e) {
+            return api_resid_error();
+        }
     }
 
 }

@@ -21,6 +21,12 @@ return [
         'path' => \think\facade\Env::get('runtime_path') . 'login/',
         'expire' => 21600,//1天
     ],
+
+    'redis' => [
+        'type' => 'redis',
+        'host' => '127.0.0.1',
+        'expire' => 1000,
+    ],
 //    // 缓存保存目录
 //    'path'   => '',
 //    // 缓存前缀

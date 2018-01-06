@@ -73,6 +73,10 @@ function api_login_elsewhere(array $header = [], $options = []) {
     return ApiOut::loginElsewhere($header,$options);
 }
 
+function api_resid_error(array $header = [], $options = []) {
+    return ApiOut::redisWriteError($header,$options);
+}
+
 /************** 加密、解密 *************
  *
  * 有3套密钥

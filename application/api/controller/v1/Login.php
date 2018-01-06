@@ -9,20 +9,18 @@
 namespace app\api\controller\v1;
 
 
+use app\api\controller\Token;
 use app\api\model\ModelUser;
 use app\api\validate\V_Login;
+use think\cache\driver\Redis;
+use think\facade\Cache;
 use xhtool\base\BaseApiCtr;
 
 class Login extends BaseApiCtr
 {
 
-    public function index(){
-        return 'ss';
-    }
+    public $restMethodList = 'post';
 
-    public function read(){
-        return 'kd';
-    }
 
     public function save(){
         $array = [
@@ -41,7 +39,8 @@ class Login extends BaseApiCtr
         }
         $res = $mlogin->where($array)->find();
         if ($res){
-            return api_success($this->request_from);
+            $token = Token::setAccessToken($res);
+            return api_success($token);
         }else {
             return api_error('密码错误');
         }

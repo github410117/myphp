@@ -90,11 +90,11 @@ trait ReturnCode
         return Response::create($responseData, $this->type, $code, $headers);
     }
 
-    public function returnmsg($code = '400', $msg = '', $data = [], $header = [])
+    public function returnmsg($code = '403', $msg = '', $data = [], $header = [])
     {
         http_response_code($code);
         $return['code'] = $code;
-        $return['message'] = $msg;
+        $return['msg'] = $msg;
         if (!empty($data)) $return['data'] = $data;
 
         foreach ($header as $name => $val) {
