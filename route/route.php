@@ -17,7 +17,7 @@ Route::get('think/:ver', function () {
 //
 //Route::get('hello/:name', 'index/hello');
 //Route::rou('api/:ver/login', 'api/:ver/Login');
-Route::resource('api/:ver/login', 'api/:ver.login');
+Route::resource('api/:ver/login', 'api/:ver.login')->allowCrossDomain();
 //return [
 //
 //];

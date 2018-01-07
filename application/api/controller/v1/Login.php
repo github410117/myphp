@@ -16,11 +16,16 @@ use think\cache\driver\Redis;
 use think\facade\Cache;
 use xhtool\base\BaseApiCtr;
 
+
+
 class Login extends BaseApiCtr
 {
 
-    public $restMethodList = 'post';
+//    public $restMethodList = 'post';
 
+    public function index(){
+        return api_success('称呼你刚刚');
+    }
 
     /**
      * 登录
