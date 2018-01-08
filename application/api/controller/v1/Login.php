@@ -43,7 +43,7 @@ class Login extends BaseApiCtr
         $vlogin = new V_Login();
         if (!$vlogin->check($array)) {
             return api_param_error($vlogin->getError());
-        }
+        1}
 
         $mlogin = new ModelUser();
         if (empty($mlogin->checkExistUser(input('param.username')))){
